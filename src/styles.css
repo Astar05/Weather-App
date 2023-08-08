@@ -95,3 +95,6 @@ h4 {
   line-height: 25px;
   font-weight: bolder;
 }
+p {
+  text-align: center;
+}
