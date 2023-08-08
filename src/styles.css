@@ -1,0 +1,97 @@
+.container {
+  display: block;
+  margin: 35px;
+  padding: 25px;
+  max-width: 90%;
+  border-radius: 500px;
+  border-width: 10px 4px;
+  outline: ridge grey;
+  outline-width: 10px;
+  position: relative;
+  overflow: hidden;
+}
+video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+.new-city-search {
+  display: block;
+  margin: 0 auto;
+}
+
+#search {
+  margin: 0px -75px;
+}
+.spaced {
+  margin-left: 10px;
+}
+#main {
+  margin: 15px 25px 0px 150px;
+  padding: 20px 170px 20px 15px;
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 75px;
+  border-radius: 40%;
+  outline: solid black;
+  background: rgba(203, 214, 204, 0.3);
+}
+
+#main-degree {
+  text-decoration: none;
+}
+
+#current {
+  margin: 0px 25px 0px 0px;
+  padding: 25px 15px;
+}
+#current-info {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  color: black;
+  margin: 0 auto;
+  font-size: 22px;
+}
+
+.forecast-container {
+  display: block;
+  margin: 20px auto;
+  padding: 25px 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+h4 {
+  font-family: "Poppins", sans-serif;
+  text-align: left;
+  margin: 10px auto;
+  padding: 0px 25px 0px 150px;
+  font-size: 20px;
+}
+
+#forecast-border {
+  margin: 0 auto;
+  padding: 10px 10px 10px 10px;
+  outline: groove grey;
+  outline-width: 5px;
+  border-radius: 100px;
+}
+.col {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.card {
+  outline: groove black;
+  outline-width: 3px;
+  border-radius: 47%;
+  background: rgba(203, 214, 204, 0.3);
+}
+
+.card-text {
+  line-height: 25px;
+  font-weight: bolder;
+}
