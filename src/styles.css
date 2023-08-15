@@ -10,6 +10,10 @@
   position: relative;
   overflow: hidden;
 }
+
+body {
+  max-width: 978px;
+}
 video {
   object-fit: cover;
   width: 100%;
