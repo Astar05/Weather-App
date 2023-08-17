@@ -80,6 +80,10 @@ function displayCurrent(response) {
   currentCity.innerHTML = response.data.name;
   let description = document.querySelector("#weather");
   description.innerHTML = response.data.weather[0].description;
+  let windspeed = document.querySelector("#wind");
+  windspeed.innerHTML = `Wind: ${Math.round(
+    response.data.wind.speed * 2.23694
+  )} mph`;
 }
 
 let currentButton = document.querySelector("#current-location");
@@ -109,6 +113,10 @@ function displaySearchResults(response) {
   description.innerHTML = response.data.list[0].weather[0].description;
   let city = document.querySelector("#current-city");
   city.innerHTML = response.data.city.name;
+  let windspeed = document.querySelector("#wind");
+  windspeed.innerHTML = `Wind: ${Math.round(
+    response.data.list[0].wind.speed * 2.23694
+  )} mph`;
 }
 
 let searchForm = document.querySelector("#citySearch");
