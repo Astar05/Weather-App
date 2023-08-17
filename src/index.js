@@ -84,6 +84,11 @@ function displayCurrent(response) {
   windspeed.innerHTML = `Wind: ${Math.round(
     response.data.wind.speed * 2.23694
   )} mph`;
+  let currentIcon = document.querySelector("#current-icon");
+  let weatherIconCode = response.data.weather[0].icon;
+  let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
+  currentIcon.setAttribute("src", iconUrl);
+  currentIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 let currentButton = document.querySelector("#current-location");
@@ -117,6 +122,11 @@ function displaySearchResults(response) {
   windspeed.innerHTML = `Wind: ${Math.round(
     response.data.list[0].wind.speed * 2.23694
   )} mph`;
+  let currentIcon = document.querySelector("#current-icon");
+  let weatherIconCode = response.data.list[0].weather[0].icon;
+  let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
+  currentIcon.setAttribute("src", iconUrl);
+  currentIcon.setAttribute("alt", response.data.list[0].weather[0].description);
 }
 
 let searchForm = document.querySelector("#citySearch");

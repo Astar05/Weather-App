@@ -61,6 +61,12 @@ video {
   font-size: 22px;
 }
 
+.weather-icon {
+  width: 40px;
+  height: 35px;
+  filter: grayscale(100%);
+}
+
 .forecast-container {
   display: block;
   margin: 20px auto;
