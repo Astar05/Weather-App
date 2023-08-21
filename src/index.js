@@ -45,21 +45,24 @@ function tempConvert(event) {
   let temp = document.querySelector("#main-temp");
   let degree = document.querySelector("#main-degree");
 
-  if (degree.textContent === "°C") {
-    let fahrenheit = Math.round((parseFloat(temp.textContent) * 9) / 5 + 32);
-    temp.textContent = fahrenheit;
-    degree.innerHTML = "<a href='#'>°F</a>";
-    degree.firstChild.style.textDecoration = "none";
-  } else {
+  if (degree.textContent === "°F") {
     let celsius = Math.round(((parseFloat(temp.textContent) - 32) * 5) / 9);
     temp.textContent = celsius;
-    degree.innerHTML = "<a href='#'>°C</a>";
-    degree.firstChild.style.textDecoration = "none";
+    degree.textContent = "°C";
+  } else {
+    let fahrenheit = Math.round((parseFloat(temp.textContent) * 9) / 5 + 32);
+    temp.textContent = fahrenheit;
+    degree.textContent = "°F";
   }
 }
 
+let temp = document.querySelector("#main-temp");
+temp.textContent = "71";
 let degree = document.querySelector("#main-degree");
-degree.addEventListener("click", tempConvert);
+degree.textContent = "°F";
+
+let degreeLink = document.querySelector("#main-degree");
+degreeLink.addEventListener("click", tempConvert);
 
 function searchCurrent(position) {
   console.log(position.coords.latitude);
@@ -73,9 +76,13 @@ function searchCurrent(position) {
 }
 
 function displayCurrent(response) {
-  let temperature = Math.round(response.data.main.temp);
+  let temperatureFahrenheit = Math.round(
+    (parseFloat(response.data.main.temp) * 9) / 5 + 32
+  );
   let temp = document.querySelector("#main-temp");
-  temp.innerHTML = temperature;
+  temp.textContent = temperatureFahrenheit;
+  let degree = document.querySelector("#main-degree");
+  degree.textContent = "°F";
   let currentCity = document.querySelector("#current-city");
   currentCity.innerHTML = response.data.name;
   let description = document.querySelector("#weather");
@@ -111,9 +118,11 @@ function searchCity(city) {
 }
 
 function displaySearchResults(response) {
-  let temperature = Math.round(response.data.list[0].main.temp);
+  let temperatureFahrenheit = Math.round(response.data.list[0].main.temp);
   let temp = document.querySelector("#main-temp");
-  temp.innerHTML = temperature;
+  temp.textContent = temperatureFahrenheit;
+  let degree = document.querySelector("#main-degree");
+  degree.textContent = "°F";
   let description = document.querySelector("#weather");
   description.innerHTML = response.data.list[0].weather[0].description;
   let city = document.querySelector("#current-city");
