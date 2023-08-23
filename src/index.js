@@ -31,44 +31,37 @@ function displayTime() {
 }
 displayTime();
 
-function displayForecast(response) {
-  let forecast = response.data.list;
+function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `div class="col" id="forecast"`;
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  forecast.forEach(function (index) {
-    if (index < 5) {
-      forecastHTML =
-        forecastHTML +
-        `<div class="col" id="forecast">
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Wed", "Thurs", "Fri", "Sat", "Sun"];
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+   <div class="col" id="forecast">
             <div class="card text-center">
               <div class="card-body">
-        ${list.dt}
-        <img  src="http://openweathermap.org/img/wn/${
-          list.weather[0].icon
-        }@2x.png"
+        ${day}
+        <img  src="http://openweathermap.org/img/wn/50d@2x.png"
                   alt=""
-                  width="42"
+                  width="45"
                 />
                 <div class="forecast-temp">
-                  ${Math.round(list.main.temp)}°F </div>
+                  81°F </div>
                   </div>
                 </div>
               </div>`;
-    }
   });
 
-  forecastHTML = forecastHTML + `div class="col" id="forecast"`;
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getForecast(coordinates) {
-  let apiKey = "ebef9ca4a8de66ed586fac628fade056";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(displayForecast);
-}
+displayForecast();
 
 function placeDisplay(event) {
   event.preventDefault();
@@ -175,7 +168,6 @@ function displaySearchResults(response) {
   let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
   currentIcon.setAttribute("src", iconUrl);
   currentIcon.setAttribute("alt", response.data.list[0].weather[0].description);
-  getForecast(response.data.coord);
 }
 
 let searchForm = document.querySelector("#citySearch");
