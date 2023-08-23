@@ -31,6 +31,37 @@ function displayTime() {
 }
 displayTime();
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = "col";
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col">
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title" id="forecast-date"${day}</h5>
+              <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="Weather Icon" class="weather-icon">
+              <p class="card-text"><span id="forecast-temp"85</span>°F</p>
+            </div>
+          </div>
+        </div>`;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "718acbad0e34daecdcbc4efb14a81ca0";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function placeDisplay(event) {
   event.preventDefault();
   let cityState = document.querySelector("#current-city");
@@ -142,3 +173,4 @@ let searchForm = document.querySelector("#citySearch");
 searchForm.addEventListener("submit", searchPosition);
 
 searchCity("Boston, Massachusetts");
+displayForecast();
