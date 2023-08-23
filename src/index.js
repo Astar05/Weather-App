@@ -48,8 +48,9 @@ function displayForecast(response) {
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
-      forecastHTML += `
-   <div class="col" id="forecast">
+      forecastHTML =
+        forecastHTML +
+        `<div class="col" id="forecast">
             <div class="card text-center">
               <div class="card-body">
         ${formatDay(forecastDay.dt)}
@@ -69,7 +70,7 @@ function displayForecast(response) {
     }
   });
 
-  forecastHTML += `</div>`;
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
