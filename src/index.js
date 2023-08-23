@@ -32,34 +32,34 @@ function displayTime() {
 displayTime();
 
 function displayForecast(response) {
-  let forecast = response.data.daily;
+  let forecast = response.data.list;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `div class="col" id="forecast"`;
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  forecast.forEach(function (forecastDay, index) {
+  forecast.forEach(function (index) {
     if (index < 5) {
       forecastHTML =
         forecastHTML +
         `<div class="col" id="forecast">
             <div class="card text-center">
               <div class="card-body">
-        ${formatDay(forecastDay.dt)}
+        ${list.dt}
         <img  src="http://openweathermap.org/img/wn/${
-          forecastDay.weather[0].icon
+          list.weather[0].icon
         }@2x.png"
                   alt=""
                   width="42"
                 />
                 <div class="forecast-temp">
-                  ${Math.round(forecastDay.temp.day)}°F </div>
+                  ${Math.round(list.temp.main.temp)}°F </div>
                   </div>
                 </div>
               </div>`;
     }
   });
 
-  forecastHTML = forecastHTML + `</div>`;
+  forecastHTML = forecastHTML + `div class="col" id="forecast"`;
   forecastElement.innerHTML = forecastHTML;
 }
 
