@@ -35,42 +35,38 @@ function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-4" style="width: 40rem" id="forecast-border">`;
+  let forecastHTML = `div class="col" id="forecast"`;
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       forecastHTML =
         forecastHTML +
-        `
-      <div class="col">
-        <div class="card text-center">
-          <div class="card-body">
-            <div class="card-title" id="forecast-date">${
-              days[new Date(forecastDay.dt * 1000).getDay()]
-            }</div>
-            <img
-              src="http://openweathermap.org/img/wn/${
-                forecastDay.weather[0].icon
-              }@2x.png"
-              alt=""
-              width="42"
-            />
-            <div class="weather-forecast-temp">${Math.round(
-              forecastDay.temp.day
-            )}°C</div>
-          </div>
-        </div>
-      </div>`;
+        `<div class="col" id="forecast">
+            <div class="card text-center">
+              <div class="card-body">
+        ${formatDay(forecastDay.dt)}
+        <img  src="http://openweathermap.org/img/wn/${
+          forecastDay.weather[0].icon
+        }@2x.png"
+                  alt=""
+                  width="42"
+                />
+                <div class="forecast-temp">
+                  ${Math.round(forecastDay.temp.day)}°F </div>
+                  </div>
+                </div>
+              </div>`;
     }
   });
 
-  forecastHTML += `</div>`;
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
-  let apiKey = "718acbad0e34daecdcbc4efb14a81ca0";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "ebef9ca4a8de66ed586fac628fade056";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&${apiKey}&units=metric`;
+
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -179,10 +175,10 @@ function displaySearchResults(response) {
   let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
   currentIcon.setAttribute("src", iconUrl);
   currentIcon.setAttribute("alt", response.data.list[0].weather[0].description);
+  getForecast(response.data.coord);
 }
 
 let searchForm = document.querySelector("#citySearch");
 searchForm.addEventListener("submit", searchPosition);
 
 searchCity("Boston, Massachusetts");
-displayForecast();
