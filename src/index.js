@@ -31,28 +31,40 @@ function displayTime() {
 }
 displayTime();
 
-function displayForecast() {
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = "col";
+  let forecastHTML = `<div class="row row-cols-1 row-cols-md-5 g-4" style="width: 40rem" id="forecast-border">`;
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       forecastHTML =
         forecastHTML +
-        `<div class="col">
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title" id="forecast-date"${day}</h5>
-              <img src="http://openweathermap.org/img/wn/50d@2x.png" alt="Weather Icon" class="weather-icon">
-              <p class="card-text"><span id="forecast-temp"85</span>°F</p>
-            </div>
+        `
+      <div class="col">
+        <div class="card text-center">
+          <div class="card-body">
+            <div class="card-title" id="forecast-date">${
+              days[new Date(forecastDay.dt * 1000).getDay()]
+            }</div>
+            <img
+              src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png"
+              alt=""
+              width="42"
+            />
+            <div class="weather-forecast-temp">${Math.round(
+              forecastDay.temp.day
+            )}°C</div>
           </div>
-        </div>`;
+        </div>
+      </div>`;
     }
   });
 
-  forecastHTML = forecastHTML + `</div>`;
+  forecastHTML += `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
