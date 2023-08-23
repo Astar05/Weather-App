@@ -52,7 +52,7 @@ function displayForecast(response) {
                   width="42"
                 />
                 <div class="forecast-temp">
-                  ${Math.round(list.temp.main.temp)}°F </div>
+                  ${Math.round(list.main.temp)}°F </div>
                   </div>
                 </div>
               </div>`;
