@@ -165,9 +165,9 @@ function searchPosition(event) {
 }
 function searchCity(city) {
   let apiKey = "718acbad0e34daecdcbc4efb14a81ca0";
-  let apiSearchUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
 
-  axios.get(apiSearchUrl).then(displaySearchResults);
+  axios.get(apiUrl).then(displaySearchResults);
 }
 
 function displaySearchResults(response) {
