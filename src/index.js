@@ -171,24 +171,24 @@ function searchCity(city) {
 }
 
 function displaySearchResults(response) {
-  let temperatureFahrenheit = Math.round(response.data.list[0].main.temp);
+  let temperatureFahrenheit = Math.round(response.data.main.temp);
   let temp = document.querySelector("#main-temp");
   temp.textContent = temperatureFahrenheit;
   let degree = document.querySelector("#main-degree");
   degree.textContent = "°F";
   let description = document.querySelector("#weather");
-  description.innerHTML = response.data.list[0].weather[0].description;
+  description.innerHTML = response.data.weather[0].description;
   let city = document.querySelector("#current-city");
-  city.innerHTML = response.data.city.name;
+  city.innerHTML = response.data.name;
   let windspeed = document.querySelector("#wind");
   windspeed.innerHTML = `Wind: ${Math.round(
-    response.data.list[0].wind.speed * 2.23694
+    response.data.wind.speed * 2.23694
   )} mph`;
   let currentIcon = document.querySelector("#current-icon");
-  let weatherIconCode = response.data.list[0].weather[0].icon;
-  let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}@2x.png`;
+  let weatherIconCode = response.data.weather[0].icon;
+  let iconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}.png`;
   currentIcon.setAttribute("src", iconUrl);
-  currentIcon.setAttribute("alt", response.data.list[0].weather[0].description);
+  currentIcon.setAttribute("alt", response.data.weather[0].description);
   getForecast(response.data.coord);
 }
 
