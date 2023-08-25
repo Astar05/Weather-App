@@ -1,5 +1,6 @@
 let videoContainer = document.getElementById("videoContainer");
 let timeElement = document.querySelector("#time");
+let forecastTempsFahrenheit = [];
 
 let videoUrls = [
   "video/cloudy-sun.mp4",
@@ -65,8 +66,6 @@ let interval = setInterval(() => {
   updateVideo();
   displayTime();
 }, 60000);
-
-let forecastTempsFahrenheit = [];
 
 function displayForecast(response) {
   let forecast = response.data.daily;
