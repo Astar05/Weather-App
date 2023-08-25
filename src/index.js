@@ -75,7 +75,6 @@ function displayForecast(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "ebef9ca4a8de66ed586fac628fade056";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
 
@@ -116,8 +115,6 @@ let degreeLink = document.querySelector("#main-degree");
 degreeLink.addEventListener("click", tempConvert);
 
 function searchCurrent(position) {
-  console.log(position.coords.latitude);
-  console.log(position.coords.longitude);
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiKey = "718acbad0e34daecdcbc4efb14a81ca0";
