@@ -212,8 +212,8 @@ let videoContainer = document.getElementById("videoContainer");
 
 let videoUrls = [
   "video/cloudy-sun.mp4",
-  "video/some-other-video.mp4",
-  "video/another-video.mp4",
+  "video/clouds-afternoon.mp4",
+  "video/clouds-evening.mp4",
 ];
 
 function getCurrentVideoIndex() {
