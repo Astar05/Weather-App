@@ -112,3 +112,25 @@ h4 {
 p {
   text-align: center;
 }
+
+img.linkedin-logo {
+  display: inline-block;
+  margin: 10px;
+  max-width: 25px;
+  padding: 0px;
+  border-radius: 50px;
+}
+
+li.coder-connects {
+  display: inline;
+  padding: 0;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+ul {
+  text-align: center;
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+}
