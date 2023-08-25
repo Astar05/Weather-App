@@ -1,5 +1,5 @@
 let videoContainer = document.getElementById("videoContainer");
-let timeElement = document.querySelector("#time"); // Assuming you have an element with id "time"
+let timeElement = document.querySelector("#time");
 
 let videoUrls = [
   "video/cloudy-sun.mp4",
