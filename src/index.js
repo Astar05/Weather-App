@@ -1,6 +1,33 @@
-function displayTime() {
-  let time = document.querySelector("#time");
+let videoContainer = document.getElementById("videoContainer");
+let timeElement = document.querySelector("#time"); // Assuming you have an element with id "time"
 
+let videoUrls = [
+  "video/cloudy-sun.mp4",
+  "video/clouds-afternoon.mp4",
+  "video/clouds-evening.mp4",
+];
+
+function getCurrentVideoIndex() {
+  let now = new Date();
+  let hours = now.getHours(); // Get local hours
+
+  if (hours >= 7 && hours < 12) {
+    return 0; // 7 am - 11:59 am
+  } else if (hours >= 12 && hours < 17) {
+    return 1; // 12 pm - 4:59 pm
+  } else {
+    return 2; // 5 pm - 6:59 am
+  }
+}
+
+function updateVideo() {
+  let index = getCurrentVideoIndex();
+  videoContainer.src = videoUrls[index];
+  videoContainer.load();
+  videoContainer.play();
+}
+
+function displayTime() {
   let now = new Date();
 
   let days = [
@@ -27,17 +54,17 @@ function displayTime() {
   let timeZone = now
     .toLocaleTimeString("en-us", { timeZoneName: "short" })
     .split(" ")[2];
-  time.innerHTML = `As of ${day} | ${hour}:${min} ${period} ${timeZone}`;
+
+  timeElement.innerHTML = `As of ${day} | ${hour}:${min} ${period} ${timeZone}`;
 }
+
+updateVideo();
 displayTime();
 
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-
-  return days[day];
-}
+let interval = setInterval(() => {
+  updateVideo();
+  displayTime();
+}, 60000);
 
 let forecastTempsFahrenheit = [];
 
@@ -207,35 +234,3 @@ let searchForm = document.querySelector("#citySearch");
 searchForm.addEventListener("submit", searchPosition);
 
 searchCity("Boston, Massachusetts");
-
-let videoContainer = document.getElementById("videoContainer");
-
-let videoUrls = [
-  "video/cloudy-sun.mp4",
-  "video/clouds-afternoon.mp4",
-  "video/clouds-evening.mp4",
-];
-
-function getCurrentVideoIndex() {
-  let now = new Date();
-  let hours = now.getHours();
-
-  if (hours >= 7 && hours < 12) {
-    return 0; // 7 am - 11:59 am
-  } else if (hours >= 12 && hours < 17) {
-    return 1; // 12 pm - 4:59 pm
-  } else {
-    return 2; // 5 pm - 6:59 am
-  }
-}
-
-function updateVideo() {
-  let index = getCurrentVideoIndex();
-  videoContainer.src = videoUrls[index];
-  videoContainer.load();
-  videoContainer.play();
-}
-
-updateVideo();
-
-let interval = setInterval(updateVideo, 60000);
