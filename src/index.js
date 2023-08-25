@@ -218,7 +218,7 @@ let videoUrls = [
 
 function getCurrentVideoIndex() {
   let now = new Date();
-  let hours = now.getUTCHours();
+  let hours = now.getHours();
 
   if (hours >= 7 && hours < 12) {
     return 0; // 7 am - 11:59 am
