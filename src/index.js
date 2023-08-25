@@ -1,3 +1,16 @@
+function changeTheme() {
+  let body = document.querySelector("body");
+
+  if (body.classList.contains("dark")) {
+    body.classList.remove("dark");
+  } else {
+    body.classList.add("dark");
+  }
+}
+
+let themeToggleButton = document.querySelector(".theme-toggle-button");
+themeToggleButton.addEventListener("click", changeTheme);
+
 function displayTime() {
   let time = document.querySelector("#time");
 

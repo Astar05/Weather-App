@@ -1,3 +1,27 @@
+.theme-toggle-button {
+  background-color: #494949;
+  color: #fafafa;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 60px;
+}
+
+.dark .theme-toggle-button {
+  color: #1d1716;
+  background-color: #dfdfdf;
+}
+
+body.dark {
+  background-color: #1d1716;
+  color: #fafafa;
+  text-shadow: -1px -1px 0 #494949, 1px -1px 0 #494949;
+}
+
+.dark #current-info {
+  color: #f2f4f7;
+}
+
 .container {
   display: block;
   margin: 35px;
