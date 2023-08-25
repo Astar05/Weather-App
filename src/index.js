@@ -39,42 +39,46 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+let forecastTempsFahrenheit = [];
+
 function displayForecast(response) {
   let forecast = response.data.daily;
-
   let forecastElement = document.querySelector("#forecast");
-
   let forecastHTML = `<div class="row">`;
+
+  forecastTempsFahrenheit = []; // Reset the array
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
-      forecastHTML =
-        forecastHTML +
-        `<div class="col" id="forecast">
+      let fahrenheitTemp = Math.round(
+        (forecastDay.temp.max + forecastDay.temp.min) / 2
+      );
+      forecastTempsFahrenheit.push(fahrenheitTemp);
+
+      forecastHTML += `<div class="col">
             <div class="card text-center">
               <div class="card-body">
-        ${formatDay(forecastDay.dt)}
-        <img  src="http://openweathermap.org/img/wn/${
-          forecastDay.weather[0].icon
-        }@2x.png"
+                ${formatDay(forecastDay.dt)}
+                <img src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png"
                   alt=""
                   width="45"
                 />
                 <div class="forecast-temp">
-                  ${Math.round(
-                    (forecastDay.temp.max + forecastDay.temp.min) / 2
-                  )}>°F</div>
-                  </div>
-                </div>
-              </div>`;
+                  ${fahrenheitTemp}<span id="forecast-degree">°F</span></div>
+              </div>
+            </div>
+          </div>`;
     }
   });
 
-  forecastHTML = forecastHTML + `</div>`;
+  forecastHTML += `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
 function getForecast(coordinates) {
+  console.log(coordinates);
   let apiKey = "ebef9ca4a8de66ed586fac628fade056";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
 
@@ -100,19 +104,21 @@ function tempConvert(event) {
     temp.textContent = celsius;
     degree.textContent = "°C";
 
-    forecastTemp.forEach(function (fahrenheitDefault, index) {
-      let forecastTemp = document.querySelectorAll(".forecast-temp")[index];
-      let celsiusDegree = Math.round(((fahrenheitDefault - 32) * 5) / 9);
-      forecastTemp.textContent = `${celsiusDegree}°C`;
+    forecastTempsFahrenheit.forEach(function (fahrenheitTemp, index) {
+      let forecastTempElement =
+        document.querySelectorAll(".forecast-temp")[index];
+      let celsiusForecast = Math.round(((fahrenheitTemp - 32) * 5) / 9);
+      forecastTempElement.textContent = `${celsiusForecast}°C`;
     });
   } else {
     let fahrenheit = Math.round((parseFloat(temp.textContent) * 9) / 5 + 32);
     temp.textContent = fahrenheit;
     degree.textContent = "°F";
 
-    forecastTempsFahrenheit.forEach(function (fahrenheitDefault, index) {
-      let forecastTemp = document.querySelectorAll(".forecast-temp")[index];
-      forecastTemp.textContent = `${fahrenheitDefault}°F`;
+    forecastTempsFahrenheit.forEach(function (fahrenheitTemp, index) {
+      let forecastTempElement =
+        document.querySelectorAll(".forecast-temp")[index];
+      forecastTempElement.textContent = `${fahrenheitTemp}°F`;
     });
   }
 }
@@ -121,6 +127,8 @@ let degreeLink = document.querySelector("#main-degree");
 degreeLink.addEventListener("click", tempConvert);
 
 function searchCurrent(position) {
+  console.log(position.coords.latitude);
+  console.log(position.coords.longitude);
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiKey = "718acbad0e34daecdcbc4efb14a81ca0";
