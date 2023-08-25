@@ -46,7 +46,7 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
 
-  forecastTempsFahrenheit = []; // Reset the array
+  forecastTempsFahrenheit = [];
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
@@ -207,3 +207,33 @@ let searchForm = document.querySelector("#citySearch");
 searchForm.addEventListener("submit", searchPosition);
 
 searchCity("Boston, Massachusetts");
+
+let videoContainer = document.getElementById("videoContainer");
+
+let videoUrls = [
+  "video/cloudy-sun.mp4",
+  "video/some-other-video.mp4",
+  "video/another-video.mp4",
+];
+
+function getCurrentVideoIndex() {
+  let now = new Date();
+  let hours = now.getUTCHours();
+
+  if (hours >= 7 && hours < 12) {
+    return 0; // 7 am - 11:59 am
+  } else if (hours >= 12 && hours < 17) {
+    return 1; // 12 pm - 4:59 pm
+  } else {
+    return 2; // 5 pm - 6:59 am
+  }
+}
+
+function updateVideo() {
+  let index = getCurrentVideoIndex();
+  videoContainer.src = videoUrls[index];
+}
+
+updateVideo();
+
+let interval = setInterval(updateVideo, 60000);
