@@ -121,6 +121,14 @@ img.linkedin-logo {
   border-radius: 50px;
 }
 
+img.shecodes-logo {
+  display: inline-block;
+  margin: 10px;
+  max-width: 25px;
+  padding: 0px;
+  border-radius: 50px;
+}
+
 li.coder-connects {
   display: inline;
   padding: 0;
