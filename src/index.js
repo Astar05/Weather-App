@@ -232,6 +232,8 @@ function getCurrentVideoIndex() {
 function updateVideo() {
   let index = getCurrentVideoIndex();
   videoContainer.src = videoUrls[index];
+  videoContainer.load();
+  videoContainer.play();
 }
 
 updateVideo();
