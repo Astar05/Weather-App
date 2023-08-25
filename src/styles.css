@@ -37,7 +37,6 @@ body.dark {
 }
 
 body {
-  max-width: 978px;
   font-family: Arial, sans-serif;
   display: grid;
   place-items: center;
