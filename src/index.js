@@ -106,11 +106,6 @@ function tempConvert(event) {
   }
 }
 
-let temp = document.querySelector("#main-temp");
-temp.textContent = "71";
-let degree = document.querySelector("#main-degree");
-degree.textContent = "°F";
-
 let degreeLink = document.querySelector("#main-degree");
 degreeLink.addEventListener("click", tempConvert);
 
