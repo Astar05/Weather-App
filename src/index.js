@@ -63,7 +63,7 @@ function displayForecast(response) {
                 <div class="forecast-temp">
                   ${Math.round(
                     (forecastDay.temp.max + forecastDay.temp.min) / 2
-                  )}°F </div>
+                  )}>°F</div>
                   </div>
                 </div>
               </div>`;
@@ -99,10 +99,21 @@ function tempConvert(event) {
     let celsius = Math.round(((parseFloat(temp.textContent) - 32) * 5) / 9);
     temp.textContent = celsius;
     degree.textContent = "°C";
+
+    forecastTemp.forEach(function (fahrenheitDefault, index) {
+      let forecastTemp = document.querySelectorAll(".forecast-temp")[index];
+      let celsiusDegree = Math.round(((fahrenheitDefault - 32) * 5) / 9);
+      forecastTemp.textContent = `${celsiusDegree}°C`;
+    });
   } else {
     let fahrenheit = Math.round((parseFloat(temp.textContent) * 9) / 5 + 32);
     temp.textContent = fahrenheit;
     degree.textContent = "°F";
+
+    forecastTempsFahrenheit.forEach(function (fahrenheitDefault, index) {
+      let forecastTemp = document.querySelectorAll(".forecast-temp")[index];
+      forecastTemp.textContent = `${fahrenheitDefault}°F`;
+    });
   }
 }
 
